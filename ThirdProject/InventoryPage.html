@@ -1,0 +1,11 @@
+<div>
+	<input type="text" ng-model="cucumber.$"  /><br/>
+	<button ng-click="findAll()">Find All</button>
+	<table>
+		<tr><th>ItemId</th><th>Name</th><th>InvType</th><th>Quantity</th></tr>
+		<tr ng-repeat="inventory in allInv | filter: cucumber">
+			<td>{{inventory.ProductId}}</td><td>{{inventory.ProductName}}</td>
+			<td>{{inventory.ProductQuantity}}</td><td>{{inventory.ProductCost}}</td>
+		</tr>
+	</table>
+</div>

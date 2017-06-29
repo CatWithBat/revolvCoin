@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html ng-app="Navi">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!--all of the angular dependencies-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"
+	integrity="sha256-+f0njwC9E3IT9zDPry5DSIcGdSxQYezBaStQ4L0ZRfU="
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="https://code.angularjs.org/1.6.1/angular-route.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+<!--bootstrap-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a ui-sref="home">Home</a></li>
+			<li><a ui-sref="add">Add Inventory</a></li>
+			<li><a ui-sref="all">All Pets</a></li>
+			<li><a ui-sref="update">update Inventory</a></li>
+		</ul>
+	</nav>
+
+	 <div ng-view></div>
+
+</body>
+<script type="text/javascript">
+angular.module('Navi', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+
+    $routeProvider
+
+        // home page
+        .when('/', {
+            templateUrl: 'views/home.html',
+            controller: 'MainController'
+        })
+
+        // nerds page that will use the NerdController
+        .when('/nerds', {
+            templateUrl: 'views/nerd.html',
+            controller: 'NerdController'
+        });
+
+    $locationProvider.html5Mode(true);
+
+}]);
+	// angular.module("Navi", [ 'ui.router' ]);//angular.module("petViews")
+// 	angular.module("Navi").config(["$locationProvider", function($locationProvider) {
+//     $locationProvider.html5Mode(true);
+// }]);
+	// angular.module("Navi").config(function($stateProvider, $urlRouterProvider) {
+	//
+	// 	$urlRouterProvider.otherwise('/home');
+	//
+	// 	$stateProvider
+	//
+	// 	// HOME STATES AND NESTED VIEWS ========================================
+	// 	.state('home', {
+	// 		url : '/home',
+	// 		templateUrl : 'Home.html'
+	// 	})
+	//
+	// 	// ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+	// 	.state('add', {
+	// 		url : '/add',
+	// 		templateUrl : 'addInventory.html',
+	// 		controller : "postCtrl"
+	// 	}).state('update', {
+	// 		url : '/update',
+	// 		templateUrl : 'updateInventory.html',
+	// 		controller : "updateCtrl"
+	// 	}).state('all', {
+	// 		url : '/all',
+	// 		templateUrl : 'InventoryPage.html',
+	// 		controller : "allCtrl"
+	// 	});
+
+	});
+
+	angular.module("Navi")
+			.controller(
+					"allCtrl",
+					function($scope, $http) {
+						$scope.findAll = function() {
+							$http(
+									{
+										method : "GET",
+										url : "http://localhost:8082/inventory/FindAll"// we need to change the urls here
+									}).then(function(response) {
+								console.log(response);s
+								$scope.allInv = response.data;
+							});
+						}
+					});
+
+	angular.module("Navi")
+			.controller(
+					"postCtrl",
+					function($scope, $http) {
+						$scope.newItem = function() {
+							$http(
+									{
+										method : "POST",
+										url : "http://localhost:8082/inventory/add",// we need to change the urls here
+										data : $scope.InvForm
+									}).then(function(response) {
+								console.log(response);
+								window.alert("New Inventory added!");
+							});
+						};
+					});
+
+	angular.module("Navi").controller("updateCtrl", function($scope, $http) {
+		$scope.findAll = function() {
+			$http({
+				method : "POST",
+				url : "http://192.168.60.99:12345/pet/all"// we need to change the urls here
+			}).then(function(response) {
+				console.log(response);
+				$scope.updateInfo = response.data;
+			});
+		}
+	});
+</script>
+</html>

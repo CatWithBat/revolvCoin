@@ -1,0 +1,21 @@
+{
+  "name": "thirdproject",
+  "version": "1.0.0",
+  "description": "Mean-Stack application using AngularJS, Express, NodeJS, and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joshua Tompkins",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.29",
+    "mongoose": "^4.11.0",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {},
+  "keywords": []
+}

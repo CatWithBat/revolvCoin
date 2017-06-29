@@ -1,0 +1,25 @@
+{
+  "name": "thirdProject",
+  "description": "Mean-Stack application using AngularJS, Express, NodeJS, and MongoDB",
+  "main": "index.js",
+  "authors": [
+    "Joshua Tompkins"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "bootstrap": "latest",
+    "angular-route": "^1.6.4",
+    "font-awesome": "latest",
+    "animate.css": "latest"
+  }
+}
